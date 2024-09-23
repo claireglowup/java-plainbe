@@ -33,8 +33,8 @@ public class BookResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBookById(@PathParam("id") Long id)  {
         Optional<Book> book = bookService.getBookById(id);
-        return book.map(b -> Response.ok(b))  // Menggunakan lambda untuk mengembalikan buku
-                   .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
+        return book.map(b -> Response.ok(b).build())  // Membuat Response dengan memanggil build()
+        .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build()); 
     }
     
 
