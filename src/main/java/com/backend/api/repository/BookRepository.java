@@ -8,8 +8,8 @@ import com.backend.entity.Book;
 
 public interface BookRepository {
     List<Book> findAll();
-    Optional<Book> findById(long id);
+    Optional<Book> findById(Long id);
     Book save(Book book);
-    void deleteById(long id);
-    boolean existById(long id);
+    void deleteById(Long id);
+    boolean existById(Long id);
 }
