@@ -3,7 +3,9 @@ package com.backend.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,8 +35,16 @@ public class BookResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBookById(@PathParam("id") Long id)  {
         Optional<Book> book = bookService.getBookById(id);
-        return book.map(b -> Response.ok(b).build())  // Membuat Response dengan memanggil build()
+        return book.map(b -> Response.ok(b).build())  
         .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build()); 
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createBook (Book book) {
+        Book createdBook = bookService.createBook(book);
+        return Response.status(Response.Status.CREATED).entity(createdBook).build();
     }
     
 
